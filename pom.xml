@@ -63,6 +63,95 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+	<groupId>io.fabric8</groupId>
+	<artifactId>docker-maven-plugin</artifactId>
+	<version>0.30.0</version>
+        <configuration>
+	   <images>
+	     <image>
+	       <name>%a-mngt:%l</name>
+	       <build>
+		 <from>alpine:latest</from>
+		   <volumes>
+    			<volume>/volume/bin</volume>
+    			<volume>/volume/config</volume>
+  		   </volumes>
+		   <assembly>
+		    <name>mngt</name>
+		    <inline>
+		<fileSets>
+		  <fileSet>
+		    <directory>.</directory>
+		    <outputDirectory>dep</outputDirectory>
+		    <excludes>
+		      <exclude>*/**</exclude>
+		    </excludes>
+		  </fileSet>
+		  <fileSet>
+		    <directory>.</directory>
+		    <outputDirectory>bin</outputDirectory>
+		    <excludes>
+		      <exclude>*/**</exclude>
+		    </excludes>
+		  </fileSet>
+		  <fileSet>
+		    <directory>.</directory>
+		    <outputDirectory>config</outputDirectory>
+		    <excludes>
+		      <exclude>*/**</exclude>
+		    </excludes>
+		  </fileSet>
+		  <fileSet>
+		    <directory>.</directory>
+		    <outputDirectory>script</outputDirectory>
+		    <excludes>
+		      <exclude>*/**</exclude>
+		    </excludes>
+		  </fileSet>
+		    <fileSet>
+		      <directory>${project.build.directory}/dependency</directory>
+		      <outputDirectory>dep</outputDirectory>
+		      <includes>
+			<include>*</include>
+		      </includes>
+		    </fileSet>
+		    <fileSet>
+		      <directory>${project.build.directory}</directory>
+		      <outputDirectory>bin</outputDirectory>
+		      <includes>
+			<include>*.jar</include>
+		      </includes>
+		    </fileSet>
+		    <fileSet>
+		      <directory>${project.basedir}/src/main/config</directory>
+		      <outputDirectory>config</outputDirectory>
+		    </fileSet>
+		    <fileSet>
+		      <directory>${project.basedir}/src/main/script</directory>
+		      <outputDirectory>script</outputDirectory>
+		    </fileSet>
+		  </fileSets>
+		   </inline>
+		    </assembly>
+		    
+		    <entryPoint>
+   			<shell>/mngt/script/install.sh</shell>
+		   </entryPoint>
+	       </build>
+	     </image>
+	   </images>
+        </configuration>
+        <executions>
+          <execution>
+            <id>build</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+	      <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
     <repositories>
@@ -70,22 +159,22 @@
             <id>nexus.inter-iot.eu-releases</id>
             <url>http://nexus.inter-iot.eu/repository/maven-releases/</url>
             <releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
+		<enabled>true</enabled>
+	    </releases>
+	    <snapshots>
+		<enabled>false</enabled>
+	    </snapshots>
         </repository>
         <repository>
             <id>nexus.inter-iot.eu-snapshots</id>
             <url>http://nexus.inter-iot.eu/repository/maven-snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
+	    <releases>
+		<enabled>false</enabled>
+	    </releases>
+	    <snapshots>
+		<enabled>true</enabled>
+		<updatePolicy>always</updatePolicy>
+	    </snapshots>
         </repository>
     </repositories>
 </project>
