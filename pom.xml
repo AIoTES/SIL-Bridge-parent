@@ -139,8 +139,8 @@
 		   </inline>
 		    </assembly>
 		    <runCmds>
-				<run>chmod +x /mngt/script/*.sh</run>
-			</runCmds>
+			<run>chmod +x /mngt/script/*.sh || true</run>
+		    </runCmds>
 		    <entryPoint>
    			<shell>/mngt/script/install.sh</shell>
 		   </entryPoint>
