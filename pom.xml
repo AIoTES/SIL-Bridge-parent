@@ -138,7 +138,9 @@
 		  </fileSets>
 		   </inline>
 		    </assembly>
-		    
+		    <runCmds>
+				<run>chmod +x /mngt/script/*.sh</run>
+			</runCmds>
 		    <entryPoint>
    			<shell>/mngt/script/install.sh</shell>
 		   </entryPoint>
