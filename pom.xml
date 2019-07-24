@@ -130,6 +130,10 @@
 		    <fileSet>
 		      <directory>${project.basedir}/src/main/script</directory>
 		      <outputDirectory>script</outputDirectory>
+			  <includes>
+				<include>*.sh</include>
+			  </includes>
+			  <fileMode>0755</fileMode>
 		    </fileSet>
 		  </fileSets>
 		   </inline>
