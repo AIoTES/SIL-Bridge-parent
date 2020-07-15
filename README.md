@@ -5,6 +5,7 @@ To install the POM, clone this repository and use
 
 `mvn install`
 
+Note: the docker daemon should be running on the same machine this pom will be installed or the installation process will fail.
 
 ### How to build bridge installation image
 In the bridge repository:
