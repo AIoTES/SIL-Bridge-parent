@@ -17,3 +17,8 @@ In the bridge repository:
 To build a bridge and create the installation image, go to the bridge repository (local) and use:
 
 `mvn clean package docker:build`
+
+
+## License
+
+Licensed under [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).
